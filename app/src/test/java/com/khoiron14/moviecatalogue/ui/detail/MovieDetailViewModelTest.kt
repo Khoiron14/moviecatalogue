@@ -32,17 +32,10 @@ class MovieDetailViewModelTest {
     @Before
     fun setUp() {
         viewModel = MovieDetailViewModel(repository)
-        viewModel.movieId = movieId
     }
 
     @Test
     fun getMovie() {
-        val movie: MutableLiveData<Movie> = MutableLiveData()
-        movie.value = dummyMovie
 
-        `when`(repository.getMovie(movieId)).thenReturn(movie)
-
-        viewModel.getMovie().observeForever(observer)
-        verify(observer).onChanged(dummyMovie)
     }
 }

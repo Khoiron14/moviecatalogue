@@ -13,7 +13,7 @@ class FavoritePagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getCount(): Int = fragmentList.size
 
-    override fun getPageTitle(position: Int): CharSequence? {
+    override fun getPageTitle(position: Int): CharSequence {
         super.getPageTitle(position)
         return fragmentTitleList[position]
     }

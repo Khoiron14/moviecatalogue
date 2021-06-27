@@ -6,10 +6,11 @@ import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.khoiron14.moviecatalogue.R
-import com.khoiron14.moviecatalogue.data.source.local.entity.MovieEntity
 import com.khoiron14.moviecatalogue.databinding.FragmentMovieFavoriteBinding
 import com.khoiron14.moviecatalogue.viewmodel.ViewModelFactory
 
@@ -19,43 +20,38 @@ import com.khoiron14.moviecatalogue.viewmodel.ViewModelFactory
  */
 class MovieFavoriteFragment : Fragment() {
 
-    private lateinit var fragmentMovieFavoriteBinding: FragmentMovieFavoriteBinding
-    private lateinit var adapter: MovieFavoriteAdapter
+    private var fragmentMovieFavoriteBinding: FragmentMovieFavoriteBinding? = null
+    private val binding get() = fragmentMovieFavoriteBinding
     private lateinit var viewModel: MovieFavoriteViewModel
+    private lateinit var adapter: MovieFavoriteAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        fragmentMovieFavoriteBinding = FragmentMovieFavoriteBinding.inflate(layoutInflater, container, false)
+    ): View? {
+        fragmentMovieFavoriteBinding = FragmentMovieFavoriteBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
-        return fragmentMovieFavoriteBinding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        itemTouchHelper.attachToRecyclerView(binding?.rvListMovie)
+
         if (activity != null) {
             val factory = ViewModelFactory.getInstance(requireActivity())
             viewModel = ViewModelProvider(this, factory)[MovieFavoriteViewModel::class.java]
             adapter = MovieFavoriteAdapter()
-            viewModel.getMovies().observe(viewLifecycleOwner, getMovieList)
+            viewModel.getMovies().observe(viewLifecycleOwner, { movieList ->
+                adapter.submitList(movieList)
+            })
 
-            with (fragmentMovieFavoriteBinding.rvListMovie) {
-                layoutManager = LinearLayoutManager(context)
-                setHasFixedSize(true)
-                this.adapter = adapter
-            }
+            binding?.rvListMovie?.layoutManager = LinearLayoutManager(context)
+            binding?.rvListMovie?.setHasFixedSize(true)
+            binding?.rvListMovie?.adapter = adapter
         }
     }
-
-    private val getMovieList =
-        Observer<List<MovieEntity>> { movieList ->
-            if (movieList != null) {
-                adapter.setData(movieList)
-                adapter.notifyDataSetChanged()
-            }
-        }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -80,4 +76,22 @@ class MovieFavoriteFragment : Fragment() {
             })
         }
     }
+
+    private val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback() {
+        override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int =
+            makeMovementFlags(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT)
+        override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean = true
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            if (view != null) {
+                val swipedPosition = viewHolder.adapterPosition
+                val movieEntity = adapter.getSwipedData(swipedPosition)
+                movieEntity?.let { viewModel.setFavorite(it) }
+                val snackbar = Snackbar.make(view as View, R.string.message_undo, Snackbar.LENGTH_LONG)
+                snackbar.setAction(R.string.message_ok) { _ ->
+                    movieEntity?.let { viewModel.setFavorite(it) }
+                }
+                snackbar.show()
+            }
+        }
+    })
 }

@@ -31,17 +31,10 @@ class TvShowDetailViewModelTest {
     @Before
     fun setUp() {
         viewModel = TvShowDetailViewModel(repository)
-        viewModel.tvShowId = tvShowId
     }
 
     @Test
-    fun getMovie() {
-        val tvShow: MutableLiveData<TvShow> = MutableLiveData()
-        tvShow.value = dummyTvShow
+    fun getTvShow() {
 
-        `when`(repository.getTvShow(tvShowId)).thenReturn(tvShow)
-
-        viewModel.getTvShow().observeForever(observer)
-        verify(observer).onChanged(dummyTvShow)
     }
 }

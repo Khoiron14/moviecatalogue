@@ -2,6 +2,7 @@ package com.khoiron14.moviecatalogue.ui.tvshow
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.paging.PagedList
 import com.khoiron14.moviecatalogue.data.Repository
 import com.khoiron14.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.khoiron14.moviecatalogue.vo.Resource
@@ -11,5 +12,5 @@ import com.khoiron14.moviecatalogue.vo.Resource
  */
 class TvShowViewModel(private val mRepository: Repository) : ViewModel() {
 
-    fun getTvShows(): LiveData<Resource<List<TvShowEntity>>> = mRepository.getTvShowList()
+    fun getTvShows(): LiveData<Resource<PagedList<TvShowEntity>>> = mRepository.getTvShowList()
 }

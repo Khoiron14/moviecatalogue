@@ -3,10 +3,13 @@ package com.khoiron14.moviecatalogue.ui.favorite.tvshow
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.khoiron14.moviecatalogue.BuildConfig
 import com.khoiron14.moviecatalogue.R
+import com.khoiron14.moviecatalogue.data.source.local.entity.MovieEntity
 import com.khoiron14.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.khoiron14.moviecatalogue.databinding.ItemMovieBinding
 import com.khoiron14.moviecatalogue.ui.detail.TvShowDetailActivity
@@ -14,7 +17,18 @@ import com.khoiron14.moviecatalogue.ui.detail.TvShowDetailActivity
 /**
  * Created by khoiron14 on 7/28/2019.
  */
-class TvShowFavoriteAdapter : RecyclerView.Adapter<TvShowFavoriteAdapter.ViewHolder>() {
+class TvShowFavoriteAdapter : PagedListAdapter<TvShowEntity, TvShowFavoriteAdapter.ViewHolder>(DIFF_CALLBACK) {
+
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TvShowEntity>() {
+            override fun areItemsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
+                return oldItem.tvShowId == newItem.tvShowId
+            }
+            override fun areContentsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 
     private var tvShows = ArrayList<TvShowEntity>()
 
@@ -35,6 +49,8 @@ class TvShowFavoriteAdapter : RecyclerView.Adapter<TvShowFavoriteAdapter.ViewHol
         val tvShow = tvShows[p1]
         p0.bind(tvShow)
     }
+
+    fun getSwipedData(swipedPosition: Int): TvShowEntity? = getItem(swipedPosition)
 
     class ViewHolder(private val binding: ItemMovieBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(tvShow: TvShowEntity) {

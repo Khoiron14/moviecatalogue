@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
-import com.google.android.material.tabs.TabLayout
 import com.khoiron14.moviecatalogue.R
 import com.khoiron14.moviecatalogue.databinding.FragmentFavoriteBinding
 import com.khoiron14.moviecatalogue.ui.favorite.movie.MovieFavoriteFragment
@@ -19,20 +18,14 @@ import com.khoiron14.moviecatalogue.ui.favorite.tvshow.TvShowFavoriteFragment
  */
 class FavoriteFragment : Fragment() {
 
-    private var fragmetFavoriteBinding: FragmentFavoriteBinding? = null
-    private val binding get() = fragmetFavoriteBinding
-
-    private var tabLayout: TabLayout? = null
-    private var viewPager: ViewPager? = null
+    private var fragmentFavoriteBinding: FragmentFavoriteBinding? = null
+    private val binding get() = fragmentFavoriteBinding
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewPager = binding?.viewPager
-        setupViewPager(viewPager!!)
-
-        tabLayout = binding?.tabLayout
-        tabLayout?.setupWithViewPager(viewPager)
+        setupViewPager(binding?.viewPager as ViewPager)
+        binding?.tabLayout?.setupWithViewPager(binding?.viewPager as ViewPager)
     }
 
     override fun onCreateView(

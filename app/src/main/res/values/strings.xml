@@ -27,4 +27,6 @@
 	<string name="daily_reminder_enable">Daily reminder enable</string>
 	<string name="daily_reminder_disable">Daily reminder disable</string>
 	<string name="msg_daily_reminder">Movie Catalogue missing you!</string>
+    <string name="message_undo">Undo</string>
+	<string name="message_ok">Ok</string>
 </resources>

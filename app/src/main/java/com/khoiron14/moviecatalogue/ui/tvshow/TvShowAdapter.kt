@@ -3,6 +3,8 @@ package com.khoiron14.moviecatalogue.ui.tvshow
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.khoiron14.moviecatalogue.BuildConfig
@@ -14,7 +16,18 @@ import com.khoiron14.moviecatalogue.ui.detail.TvShowDetailActivity
 /**
  * Created by khoiron14 on 7/3/2019.
  */
-class TvShowAdapter: RecyclerView.Adapter<TvShowAdapter.ViewHolder>() {
+class TvShowAdapter: PagedListAdapter<TvShowEntity, TvShowAdapter.ViewHolder>(DIFF_CALLBACK){
+
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TvShowEntity>() {
+            override fun areItemsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
+                return oldItem.tvShowId == newItem.tvShowId
+            }
+            override fun areContentsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 
     private var tvShows = ArrayList<TvShowEntity>()
 
