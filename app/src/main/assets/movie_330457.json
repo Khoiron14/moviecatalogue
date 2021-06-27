@@ -1,0 +1,22 @@
+{
+  "popularity": 459.869,
+  "vote_count": 228,
+  "video": false,
+  "poster_path": "/qdfARIhgpgZOBh3vfNhWS4hmSo3.jpg",
+  "id": 330457,
+  "adult": false,
+  "backdrop_path": "/xJWPZIYOEFIjZpBL7SVBGnzRYXp.jpg",
+  "original_language": "en",
+  "original_title": "Frozen II",
+  "genre_ids": [
+    12,
+    16,
+    35,
+    10402,
+    10751
+  ],
+  "title": "Frozen II",
+  "vote_average": 6.9,
+  "overview": "Elsa, Anna, Kristoff and Olaf are going far in the forest to know the truth about an ancient mystery of their kingdom.",
+  "release_date": "2019-11-20"
+}

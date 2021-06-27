@@ -1,0 +1,20 @@
+{
+  "popularity": 239.787,
+  "vote_count": 2735,
+  "video": false,
+  "poster_path": "/8j58iEBw9pOXFD2L0nt0ZXeHviB.jpg",
+  "id": 466272,
+  "adult": false,
+  "backdrop_path": "/nGJpQCAn2NKeDoEflLI5DIvsqoQ.jpg",
+  "original_language": "en",
+  "original_title": "Once Upon a Time... in Hollywood",
+  "genre_ids": [
+    35,
+    18,
+    53
+  ],
+  "title": "Once Upon a Time... in Hollywood",
+  "vote_average": 7.6,
+  "overview": "A faded television actor and his stunt double strive to achieve fame and success in the film industry during the final years of Hollywood's Golden Age in 1969 Los Angeles.",
+  "release_date": "2019-07-25"
+}

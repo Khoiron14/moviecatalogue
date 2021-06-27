@@ -1,0 +1,18 @@
+{
+  "popularity": 175.094,
+  "vote_count": 9,
+  "video": false,
+  "poster_path": "/4I0CQfnMy6sRR7QhgqsXR16TmIs.jpg",
+  "id": 645541,
+  "adult": false,
+  "backdrop_path": "/sxPycUAaLJJGq2lhhgzR96ePaO0.jpg",
+  "original_language": "en",
+  "original_title": "Ellipse",
+  "genre_ids": [
+    878
+  ],
+  "title": "Ellipse",
+  "vote_average": 3.6,
+  "overview": "A man and his dog are stranded on a volatile, oval-shaped planet and are forced to adapt and escape before time destroys them both.",
+  "release_date": "2019-11-05"
+}
