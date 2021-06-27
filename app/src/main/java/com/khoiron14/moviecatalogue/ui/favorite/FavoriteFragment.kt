@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.khoiron14.moviecatalogue.R
+import com.khoiron14.moviecatalogue.databinding.FragmentFavoriteBinding
 import com.khoiron14.moviecatalogue.ui.favorite.movie.MovieFavoriteFragment
 import com.khoiron14.moviecatalogue.ui.favorite.tvshow.TvShowFavoriteFragment
-import kotlinx.android.synthetic.main.fragment_favorite.*
 
 /**
  * A simple [Fragment] subclass.
@@ -19,16 +19,19 @@ import kotlinx.android.synthetic.main.fragment_favorite.*
  */
 class FavoriteFragment : Fragment() {
 
+    private var fragmetFavoriteBinding: FragmentFavoriteBinding? = null
+    private val binding get() = fragmetFavoriteBinding
+
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewPager = view_pager as ViewPager
+        viewPager = binding?.viewPager
         setupViewPager(viewPager!!)
 
-        tabLayout = tab_layout as TabLayout
+        tabLayout = binding?.tabLayout
         tabLayout?.setupWithViewPager(viewPager)
     }
 

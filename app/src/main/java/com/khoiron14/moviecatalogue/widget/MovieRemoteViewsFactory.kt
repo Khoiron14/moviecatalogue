@@ -8,12 +8,7 @@ import android.widget.RemoteViewsService
 import com.bumptech.glide.Glide
 import com.khoiron14.moviecatalogue.BuildConfig
 import com.khoiron14.moviecatalogue.R
-import com.khoiron14.moviecatalogue.database.DatabaseRepository
-import com.khoiron14.moviecatalogue.database.RepositoryCallback
 import com.khoiron14.moviecatalogue.data.source.local.entity.MovieEntity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 /**
  * Created by khoiron14 on 8/6/2019.
@@ -28,17 +23,17 @@ class MovieRemoteViewsFactory(var context: Context) : RemoteViewsService.RemoteV
     override fun getItemId(p0: Int): Long = 0
 
     override fun onDataSetChanged() {
-        CoroutineScope(Dispatchers.IO).launch {
-            DatabaseRepository().getMovieFavorites(object :
-                RepositoryCallback<List<MovieEntity>?> {
-                override fun onDataSuccess(base: List<MovieEntity>?) {
-                    movieList = base!!
-                }
-
-                override fun onDataError(message: String?) {
-                }
-            })
-        }
+//        CoroutineScope(Dispatchers.IO).launch {
+//            DatabaseRepository().getMovieFavorites(object :
+//                RepositoryCallback<List<MovieEntity>?> {
+//                override fun onDataSuccess(base: List<MovieEntity>?) {
+//                    movieList = base!!
+//                }
+//
+//                override fun onDataError(message: String?) {
+//                }
+//            })
+//        }
     }
 
     override fun hasStableIds(): Boolean = false

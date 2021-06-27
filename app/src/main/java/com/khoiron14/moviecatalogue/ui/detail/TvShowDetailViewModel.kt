@@ -6,9 +6,6 @@ import com.khoiron14.moviecatalogue.data.Repository
 import com.khoiron14.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.khoiron14.moviecatalogue.vo.Resource
 
-/**
- * Created by khoiron14 on 7/23/2019.
- */
 class TvShowDetailViewModel(
     private val mRepository: Repository
 ) : ViewModel() {

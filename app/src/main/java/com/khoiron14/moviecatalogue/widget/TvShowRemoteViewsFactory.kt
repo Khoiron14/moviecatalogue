@@ -9,9 +9,7 @@ import android.widget.RemoteViewsService
 import com.bumptech.glide.Glide
 import com.khoiron14.moviecatalogue.BuildConfig
 import com.khoiron14.moviecatalogue.R
-import com.khoiron14.moviecatalogue.database.DatabaseRepository
-import com.khoiron14.moviecatalogue.database.RepositoryCallback
-import com.khoiron14.moviecatalogue.data.source.local.entity.TvShowFavorite
+import com.khoiron14.moviecatalogue.data.source.local.entity.TvShowEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,7 +18,7 @@ import kotlinx.coroutines.launch
  * Created by khoiron14 on 8/7/2019.
  */
 class TvShowRemoteViewsFactory(var context: Context) : RemoteViewsService.RemoteViewsFactory {
-    private var tvShowList: List<TvShowFavorite> = listOf()
+    private var tvShowList: List<TvShowEntity> = listOf()
 
     override fun onCreate() {}
 
@@ -29,18 +27,18 @@ class TvShowRemoteViewsFactory(var context: Context) : RemoteViewsService.Remote
     override fun getItemId(p0: Int): Long = 0
 
     override fun onDataSetChanged() {
-        CoroutineScope(Dispatchers.IO).launch {
-            DatabaseRepository().getTvShowFavorites(object :
-                RepositoryCallback<List<TvShowFavorite>?> {
-                override fun onDataSuccess(base: List<TvShowFavorite>?) {
-                    tvShowList = base!!
-                }
-
-                override fun onDataError(message: String?) {
-                    Log.e("DATA_ERROR", message!!)
-                }
-            })
-        }
+//        CoroutineScope(Dispatchers.IO).launch {
+//            DatabaseRepository().getTvShowFavorites(object :
+//                RepositoryCallback<List<TvShowFavorite>?> {
+//                override fun onDataSuccess(base: List<TvShowFavorite>?) {
+//                    tvShowList = base!!
+//                }
+//
+//                override fun onDataError(message: String?) {
+//                    Log.e("DATA_ERROR", message!!)
+//                }
+//            })
+//        }
     }
 
     override fun hasStableIds(): Boolean = false
